@@ -6,7 +6,7 @@ const {
   updateRepo,
   delRepo,
   getRepos,
-} = require('../controllers/repoController');
+} = require('../repo/controller');
 
 router.route('/').get(getRepos).post(addRepo);
 

@@ -1,4 +1,4 @@
-const Repo = require('../models/Repo');
+const Repo = require('./model');
 
 exports.addRepo = async (req, res, next) => {
   const { name, url, description, stack } = req.body;

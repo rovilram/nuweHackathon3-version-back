@@ -7,7 +7,7 @@ const {
   updateUser,
   delUser,
   getUsers,
-} = require('../controllers/userController');
+} = require('../user/controller');
 
 router.route('/').get(getUsers).post(addUser);
 
