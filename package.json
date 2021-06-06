@@ -2,11 +2,11 @@
   "name": "nuwe3-back",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "src/bin/www.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node main.js",
-    "dev": "nodemon main.js"
+    "start": "node src/bin/www.js",
+    "dev": "nodemon main"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
+    "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.3",
     "nanoid": "^3.1.23",

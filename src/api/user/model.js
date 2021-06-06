@@ -1,4 +1,4 @@
-const mongoose = require('../../database/mongoose');
+const mongoose = require('../../app/database');
 const SHA256 = require('crypto-js/sha256');
 const { nanoid } = require('nanoid');
 

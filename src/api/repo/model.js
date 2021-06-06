@@ -1,4 +1,4 @@
-const mongoose = require('../../database/mongoose');
+const mongoose = require('../../app/database');
 const { nanoid } = require('nanoid');
 
 

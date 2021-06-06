@@ -1,6 +1,6 @@
 // Aquí configuración de conexión a la base de datos
 const mongoose = require('mongoose');
-require('dotenv').config();
+require('dotenv').config(); 
 
 const DB_URI = process.env.DB_URI || 'mongodb://localhost/nuwe';
 
@@ -13,10 +13,8 @@ mongoose
     useFindAndModify: false,
   })
   .then(() => {
-    // eslint-disable-next-line no-console
     console.info('Connected to DB!', DB_URI);
   })
-  // eslint-disable-next-line no-console
   .catch((err) => console.error('DB conection error:', err));
 
 //  desconecta la base de datos cuando salimos de node con ctrl+c
