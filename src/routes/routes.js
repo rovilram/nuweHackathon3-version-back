@@ -1,11 +1,12 @@
 const Router = require('express');
 const passport = require('passport');
+const {addUser} = require('../api/user/controller');
 
 const router = Router();
 
 // test endpoint
-router.get('/', (req, res) => { 
-    res.send("Hello World! I'm a API server");
+router.get('/', (req, res) => {
+  res.send("Hello World! I'm a API server");
 });
 
 router.post('/login', (req, res, next) => {
@@ -25,5 +26,7 @@ router.post('/login', (req, res, next) => {
     }
   })(req, res, next);
 });
+
+router.post('/register', addUser);
 
 module.exports = router;
