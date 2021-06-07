@@ -21,8 +21,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(
   cors({
-    origin: 'http://localhost:3000', // <-- location of the react app were connecting to
     credentials: true,
+    origin: true,
   }),
 );
 app.use(helmet());
@@ -43,16 +43,18 @@ app.use(passport.session());
 
 // endpoints
 
-app.use('/', routes);
+app.use('/', routes, errorMiddleware);
 app.use(
   '/api',
   (req, res, next) => {
     if (req.isAuthenticated()) next();
-    else
+    else{
+      console.log(req.headers)
+      console.log("error de autentiacion")
       next({
         status: 404,
         message: 'no estás logeado',
-      });
+      });}
   },
   apiRoutes,
   errorMiddleware,
