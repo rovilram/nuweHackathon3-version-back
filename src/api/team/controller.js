@@ -149,20 +149,20 @@ exports.updateTeam = async (req, res, next) => {
     if (result) {
       res.send({
         OK: 1,
-        message: `equipos que contengan a ${id}`,
+        message: `equipo con id:${id}`,
         team: result,
       });
     } else
       next({
         OK: 0,
         status: 404,
-        message: `${id} no tiene equipos`,
+        message: `no hay equipos con id:${id}`,
       });
   } catch (error) {
     next({
       OK: 0,
       status: 500,
-      message: `Error: ${error}`,
+      message: `Error al buscar equipo: ${error}`,
     });
   }
 };

@@ -16,6 +16,7 @@ const helmet = require('helmet');
 const app = express();
 
 const errorMiddleware = require('./middlewares/errorMiddleware');
+const notFound404 = require('./middlewares/notFound404');
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -43,21 +44,24 @@ app.use(passport.session());
 
 // endpoints
 
-app.use('/', routes, errorMiddleware);
+app.use('/', routes);
 app.use(
   '/api',
   (req, res, next) => {
     if (req.isAuthenticated()) next();
-    else{
-      console.log(req.headers)
-      console.log("error de autentiacion")
+    else {
+      console.log(req.headers);
+      console.log('error de autentiacion');
       next({
         status: 404,
         message: 'no estás logeado',
-      });}
+      });
+    }
   },
   apiRoutes,
-  errorMiddleware,
 );
+
+app.use(notFound404);
+app.use(errorMiddleware);
 
 module.exports = app;

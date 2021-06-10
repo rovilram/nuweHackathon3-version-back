@@ -77,7 +77,6 @@ exports.updateUser = async (req, res, next) => {
     if (result) {
       res.send({
         OK: 1,
-        status: 200,
         message: `usuario ${id} actualizado`,
         user: result,
       });

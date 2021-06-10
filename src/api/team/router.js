@@ -10,7 +10,6 @@ const {
   getTeam,
   updateTeam,
   delTeam
-  // delUser,
 } = require('./controller');
 
 router.route('/').get(getTeams).post(addTeam);

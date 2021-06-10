@@ -1,11 +1,7 @@
 const mongoose = require('../../app/database');
 const SHA256 = require('crypto-js/sha256');
 const { nanoid } = require('nanoid');
-
-const validateEmail = function (email) {
-  var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  return re.test(email);
-};
+const validateEmail = require('../../utils/validateEmail');
 
 const userSchema = new mongoose.Schema({
   id: {
@@ -47,7 +43,7 @@ userSchema.pre('findOneAndUpdate', async function (next) {
     // Hash the password
     update.password = await SHA256(update.password);
     this.setUpdate(update);
-    next()
+    next();
   }
 });
 const User = mongoose.model('User', userSchema);

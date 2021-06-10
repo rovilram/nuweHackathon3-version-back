@@ -1,6 +1,6 @@
 const Router = require('express');
 const passport = require('passport');
-const {addUser} = require('../api/user/controller');
+const { addUser } = require('../api/user/controller');
 
 const router = Router();
 
@@ -13,8 +13,9 @@ router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) throw err;
     if (!user)
-      res.status(404).send({
+      next({
         OK: 0,
+        status: 403,
         message: 'Usuario / contraseña incorrectos',
       });
     else {
