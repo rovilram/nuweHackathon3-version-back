@@ -73,32 +73,96 @@ exports.getTeamByName = async (req, res, next) => {
   }
 };
 
-
 exports.getTeamByusername = async (req, res, next) => {
-    const { username } = req.params;
+  const { username } = req.params;
 
-    try {
-      const result = await Team.find({
-        "users.username": username
+  try {
+    const result = await Team.find({
+      'users.username': username,
+    });
+
+    if (result.length) {
+      res.send({
+        OK: 1,
+        message: `equipos que contengan a ${username}`,
+        team: result,
       });
-
-      if (result) {
-        res.send({
-          OK: 1,
-          message: `equipos que contengan a ${username}`,
-          team: result,
-        });
-      } else
-        next({
-          OK: 0,
-          status: 404,
-          message: `${username} no tiene equipos`,
-        });
-    } catch (error) {
+    } else
       next({
         OK: 0,
-        status: 500,
-        message: `Error: ${error}`,
+        status: 404,
+        message: `${username} no tiene equipos`,
       });
-    }
-}
+  } catch (error) {
+    next({
+      OK: 0,
+      status: 500,
+      message: `Error: ${error}`,
+    });
+  }
+};
+
+exports.getTeam = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const result = await Team.findOne({
+      id,
+    });
+
+    if (result) {
+      res.send({
+        OK: 1,
+        message: `obtenido equipo con ${id}`,
+        team: result,
+      });
+    } else
+      next({
+        OK: 0,
+        status: 404,
+        message: `no hay equipo con ${id}`,
+      });
+  } catch (error) {
+    next({
+      OK: 0,
+      status: 500,
+      message: `Error: ${error}`,
+    });
+  }
+};
+
+exports.updateTeam = async (req, res, next) => {
+  const { id } = req.params;
+  const { teamName, description, users, repos } = req.body;
+  try {
+    const result = await Team.findOneAndUpdate(
+      { id },
+      {
+        teamName,
+        description,
+        users,
+        repos,
+      },
+      { new: true },
+    );
+    console.log('UPDATE', result);
+    if (result) {
+      res.send({
+        OK: 1,
+        message: `equipos que contengan a ${id}`,
+        team: result,
+      });
+    } else
+      next({
+        OK: 0,
+        status: 404,
+        message: `${id} no tiene equipos`,
+      });
+  } catch (error) {
+    next({
+      OK: 0,
+      status: 500,
+      message: `Error: ${error}`,
+    });
+  }
+};

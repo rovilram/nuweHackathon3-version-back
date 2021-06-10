@@ -7,16 +7,18 @@ const {
   addTeam,
   getTeamByName,
   getTeamByusername,
+  getTeam,
+  updateTeam,
+  delTeam
   // delUser,
-  // getUsers,
 } = require('./controller');
 
 router.route('/').get(getTeams).post(addTeam);
 
-router.route('/:teamName').get(getTeamByName);
+router.route('/teamname/teamName').get(getTeamByName);
 
 router.route('/user/:username').get(getTeamByusername);
 
-//router.route('/:id').get(getUser).patch(updateUser).delete(delUser);
+router.route('/:id').get(getTeam).patch(updateTeam)//.delete(delTeam);
 
 module.exports = router;
